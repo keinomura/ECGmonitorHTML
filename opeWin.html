@@ -3,13 +3,35 @@
 
 <title>opewindow</title>
 <script>
-window.open('dispWin.html', null)
+//window.open('dispWin.html', null);
+
+//var initialSpo2 = 92;
+
+//document.getElementById('spo2').innerText = parseInt('93');
+
+function numUP(){
+var spo2num =  document.getElementById('spo2').innerText;
+document.getElementById('spo2').innerText = parseInt(spo2num) + 1;
+}
+
+function numDW(){
+var spo2num =  document.getElementById('spo2').innerText;
+document.getElementById('spo2').innerText = parseInt(spo2num) - 1;
+}
+
 </script>
 
 </head>
 
 <body>
-        <div id='spo2'>11110</div>
+        <div id='spo2'>5</div>
+
+        <div class="button">	
+                <input type="button" id="numUP" value="UP" onclick="numUP()">
+	</div>
+                <div class="button">	
+                <input type="button" id="numDW" value="DW" onclick="numDW()">
+	</div>
 
 </body>
 </html>
