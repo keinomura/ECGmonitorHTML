@@ -1,25 +1,45 @@
+
+
 <!DOCTYPE html>
 <head>
 
 <title>opewindow</title>
 <script>
-//window.open('dispWin.html', null);
+//open subWindow, keep subWindow Element as sub_win
+var sub_win;
+sub_win = window.open('dispWin.html', 'disp window', 'width=300,height=150,scrollbars=1,resizable=1');
 
-//var initialSpo2 = 92;
-
+//set initial SpO2 value, after HTML loaded
 window.onload = function() {
         document.getElementById('spo2').innerText = parseInt('93');
-}
+};
+
+function openSubWin(){
+        sub_win = window.open('dispWin.html', 'disp window', 'width=300,height=150,scrollbars=1,resizable=1');
+         return false;
+};
+
 
 function numUP(){
-var spo2num =  document.getElementById('spo2').innerText;
-document.getElementById('spo2').innerText = parseInt(spo2num) + 1;
-}
+//var spo2num =  document.getElementById('spo2').innerText;
+//document.getElementById('spo2').innerText = parseInt(spo2num) + 1;
+ var dom=sub_win.document.getElementById('spo22');
+ dom.innerText = 'UP';
+
+//var dom=sub_win.document.getElementById('spo22');
+//dom.innerText = 'UP';
+};
 
 function numDW(){
-var spo2num =  document.getElementById('spo2').innerText;
-document.getElementById('spo2').innerText = parseInt(spo2num) - 1;
-}
+//var spo2num =  document.getElementById('spo2').innerText;
+//document.getElementById('spo2').innerText = parseInt(spo2num) - 1;
+var dom=sub_win.document.getElementById('spo22');
+dom.innerText = 'DW';
+};
+
+
+
+
 
 </script>
 
@@ -34,6 +54,8 @@ document.getElementById('spo2').innerText = parseInt(spo2num) - 1;
                 <div class="button">	
                 <input type="button" id="numDW" value="DW" onclick="numDW()">
 	</div>
+
+        <a href="opeWin.html" onClick="openSubWin()">open child window</a>
 
 </body>
 </html>
