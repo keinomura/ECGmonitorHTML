@@ -20,12 +20,15 @@ function openSubWin(){
 };
 
 
+var spO2numt;
+
 function numUP(){
 //var spo2num =  document.getElementById('spo2').innerText;
 //document.getElementById('spo2').innerText = parseInt(spo2num) + 1;
  var dom=sub_win.document.getElementById('spo22');
- dom.innerText = 'UP';
+ dom.innerText = parseInt(dom.innerText) + 1;
 
+if (spO2numt == dom.innerText) console.log('true!!');
 //var dom=sub_win.document.getElementById('spo22');
 //dom.innerText = 'UP';
 };
@@ -34,10 +37,29 @@ function numDW(){
 //var spo2num =  document.getElementById('spo2').innerText;
 //document.getElementById('spo2').innerText = parseInt(spo2num) - 1;
 var dom=sub_win.document.getElementById('spo22');
-dom.innerText = 'DW';
+dom.innerText = parseInt(dom.innerText) - 1;
+if (spO2numt == dom.innerText) console.log('true!!');
+
 };
 
+function numChange(pm) {
+        //console.log('pm is ',pm);
+//get spO2 value of subWindow
+var spO2num=sub_win.document.getElementById('spo22');
+var spO2val=spO2num.innerText;
+//spO2 value is number or not
+//console.log('parseInt(spO2num) is ',parseInt(spO2num));
+if (!parseInt(spO2val)==false){ //number
+  if (pm == '+') {
+          spO2num.innerText = parseInt(spO2val) + 1; //Value in not change with spO2val
+        }else{
+               spO2num.innerText =parseInt(spO2val) - 1;
+        }
+ //var spO2num = parseInt(spO2num) + 1;
+ console.log('spO2val is ',spO2val);
+}
 
+}
 
 
 
@@ -49,10 +71,10 @@ dom.innerText = 'DW';
         <div id='spo2'>5</div>
 
         <div class="button">	
-                <input type="button" id="numUP" value="UP" onclick="numUP()">
+                <input type="button" id="numUP" value="UP" onclick="numChange('+');">
 	</div>
                 <div class="button">	
-                <input type="button" id="numDW" value="DW" onclick="numDW()">
+                <input type="button" id="numDW" value="DW" onclick="numChange('-');">
 	</div>
 
         <a href="opeWin.html" onClick="openSubWin()">open child window</a>
