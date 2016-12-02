@@ -2,14 +2,21 @@
 <head>
 
 <title>disp window</title>
-
 <script>
+//
+var main_win=window.opener;
+
+window.onload = function() {
+    var iniSpO2=main_win.document.getElementById('spo2');
+//    console.log(iniSpO2.innerText);
+        document.getElementById('spo22').innerText = parseInt(iniSpO2.innerText);
+};
 
 </script>
 
 </head>
 
 <body>
-    <div id='spo2'>90</div>
+    <div id='spo22'>90</div>
 </body>
 </html>
