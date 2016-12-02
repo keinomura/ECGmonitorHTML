@@ -29,39 +29,20 @@ window.onload = function() {
 // SpO2 buttons
 ///////////////////////
 
-function numChange_new(pm) {
-  //get spO2 value of ,main_Window
-  var spO2num=document.getElementById('spO2');
-  var spO2val=spO2num.innerText;
-  //spO2 value is number or not
-  //console.log('parseInt(spO2num) is ',parseInt(spO2num));
-  if (!parseInt(spO2val)==false){ //number
-    if (pm == '+') {
-            spO2num.innerText = parseInt(spO2val) + 1; //Value in not change with spO2val
-        }else{
-            spO2num.innerText =parseInt(spO2val) - 1;
-    }
-  }
- //var spO2num = parseInt(spO2num) + 1;
- //console.log('spO2val is ',spO2val);
-
-}
-
 function numChange(pm) {
-  //console.log('pm is ',pm);
-  //get spO2 value of subWindow
-  var spO2num=sub_win.document.getElementById('spO22');
-  var spO2val=spO2num.innerText;
+  //get spO2 value of ,main_Window
+  var main_spO2num=document.getElementById('spO2');
+  var spO2val=main_spO2num.innerText;
+  //sub_window element
+  var sub_spO2num=sub_win.document.getElementById('spO22');
   //spO2 value is number or not
-  //console.log('parseInt(spO2num) is ',parseInt(spO2num));
   if (!parseInt(spO2val)==false){ //number
     if (pm == '+') {
-          spO2num.innerText = parseInt(spO2val) + 1; //Value in not change with spO2val
+      main_spO2num.innerText = parseInt(spO2val) + 1; //Value in not change with spO2val
         }else{
-               spO2num.innerText =parseInt(spO2val) - 1;
-     }
- //var spO2num = parseInt(spO2num) + 1;
- console.log('spO2val is ',spO2val);
+      main_spO2num.innerText =parseInt(spO2val) - 1;
+    }
+    sub_spO2num.innerText = main_spO2num.innerText;
   }
 }
 
@@ -75,10 +56,10 @@ function numChange(pm) {
         <div id='spO2'>5</div>
 
         <div class="button">	
-                <input type="button" id="numUP" value="UP" onclick="numChange('+');numChange_new('+');">
+                <input type="button" id="numUP" value="UP" onclick="numChange('+');">
 	</div>
                 <div class="button">	
-                <input type="button" id="numDW" value="DW" onclick="numChange('-');numChange_new('-');">
+                <input type="button" id="numDW" value="DW" onclick="numChange('-');">
 	</div>
 
         <a href="opeWin.html" onClick="openSubWin()">open child window</a>
