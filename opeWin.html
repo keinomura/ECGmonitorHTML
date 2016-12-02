@@ -53,11 +53,49 @@ function valueLimitation(upperLimit, lowerLimit, aValue){
  return aValue;
 }//func
 
+///////////////////////
+// BP mesure button
+///////////////////////
+
+function mesureBP(){
+  var main_SBP=document.getElementById('sBP').value;
+  var main_DBP=document.getElementById('dBP').value;
+  var displayBP=main_SBP + ' / ' + main_DBP;
+
+  document.getElementById('bPdisplay').innerText = displayBP;
+
+}//func
+
+
+
+
+
 </script>
 
 </head>
 
 <body>
+<!--
+BP elements
+  -->
+  <div id='bPdisplay'>-- / --</div>
+
+  <div id='inputField'>
+    <input type="text" id='sBP' value=100>
+    <input type="text" id='dBP' value=60>
+  </div>
+
+  <div class="button">	
+    <input type="button" id="mesureBP" value='mesure' onclick="mesureBP();">
+	</div>
+  
+
+
+
+
+<!--
+SpO2 elements
+  -->
         <div id='spO2'>5</div>
 
         <div class="button">	
