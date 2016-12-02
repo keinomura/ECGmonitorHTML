@@ -1,74 +1,64 @@
-
-
 <!DOCTYPE html>
 <head>
 
 <title>opewindow</title>
 <script>
+//12/2 1. value change on main window
+//     2. value limit
+
+
 //open subWindow, keep subWindow Element as sub_win
 var sub_win;
-sub_win = window.open('dispWin.html', 'disp window', 'width=300,height=150,scrollbars=1,resizable=1');
+//sub_win = window.open('dispWin.html', 'disp window', 'width=300,height=150,scrollbars=1,resizable=1');
+openSubWin();
 
-//set initial SpO2 value, after HTML loaded
-window.onload = function() {
-        document.getElementById('spo2').innerText = parseInt('93');
-};
-
+//open subWindow with URL link
 function openSubWin(){
         sub_win = window.open('dispWin.html', 'disp window', 'width=300,height=150,scrollbars=1,resizable=1');
          return false;
 };
 
-
-var spO2numt;
-
-function numUP(){
-//var spo2num =  document.getElementById('spo2').innerText;
-//document.getElementById('spo2').innerText = parseInt(spo2num) + 1;
- var dom=sub_win.document.getElementById('spo22');
- dom.innerText = parseInt(dom.innerText) + 1;
-
-if (spO2numt == dom.innerText) console.log('true!!');
-//var dom=sub_win.document.getElementById('spo22');
-//dom.innerText = 'UP';
+//set initial spO2 value, after HTML loaded
+var iniSpO2=95;
+window.onload = function() {
+        document.getElementById('spO2').innerText = iniSpO2;
 };
 
-function numDW(){
-//var spo2num =  document.getElementById('spo2').innerText;
-//document.getElementById('spo2').innerText = parseInt(spo2num) - 1;
-var dom=sub_win.document.getElementById('spo22');
-dom.innerText = parseInt(dom.innerText) - 1;
-if (spO2numt == dom.innerText) console.log('true!!');
 
-};
+///////////////////////
+// SpO2 buttons
+///////////////////////
 
 function numChange(pm) {
-        //console.log('pm is ',pm);
-//get spO2 value of subWindow
-var spO2num=sub_win.document.getElementById('spo22');
-var spO2val=spO2num.innerText;
-//spO2 value is number or not
-//console.log('parseInt(spO2num) is ',parseInt(spO2num));
-if (!parseInt(spO2val)==false){ //number
-  if (pm == '+') {
-          spO2num.innerText = parseInt(spO2val) + 1; //Value in not change with spO2val
+  //get spO2 value of ,main_Window
+  var main_spO2num=document.getElementById('spO2');
+  var spO2val=main_spO2num.innerText;
+  //sub_window element
+  var sub_spO2num=sub_win.document.getElementById('spO22');
+  //spO2 value is number or not
+  if (!parseInt(spO2val)==false){ //number
+    if (pm == '+') {
+      var calcNum = parseInt(spO2val) + 1;
         }else{
-               spO2num.innerText =parseInt(spO2val) - 1;
-        }
- //var spO2num = parseInt(spO2num) + 1;
- console.log('spO2val is ',spO2val);
+      var calcNum = parseInt(spO2val) - 1;
+    }
+    main_spO2num.innerText = valueLimitation(100, 60, calcNum); //volume limitation
+    sub_spO2num.innerText = main_spO2num.innerText;
+  }
 }
 
-}
-
-
+function valueLimitation(upperLimit, lowerLimit, aValue){
+ if (aValue >= upperLimit) aValue=upperLimit;
+ if (aValue <= lowerLimit) aValue=lowerLimit;
+ return aValue;
+}//func
 
 </script>
 
 </head>
 
 <body>
-        <div id='spo2'>5</div>
+        <div id='spO2'>5</div>
 
         <div class="button">	
                 <input type="button" id="numUP" value="UP" onclick="numChange('+');">
