@@ -38,15 +38,20 @@ function numChange(pm) {
   //spO2 value is number or not
   if (!parseInt(spO2val)==false){ //number
     if (pm == '+') {
-      main_spO2num.innerText = parseInt(spO2val) + 1; //Value in not change with spO2val
+      var calcNum = parseInt(spO2val) + 1;
         }else{
-      main_spO2num.innerText =parseInt(spO2val) - 1;
+      var calcNum = parseInt(spO2val) - 1;
     }
+    main_spO2num.innerText = valueLimitation(100, 60, calcNum); //volume limitation
     sub_spO2num.innerText = main_spO2num.innerText;
   }
 }
 
-
+function valueLimitation(upper, lower, aValue){
+ if (aValue >= upper) aValue=upper;
+ if (aValue <= lower) aValue=lower;
+ return aValue;
+}//func
 
 </script>
 
