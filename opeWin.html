@@ -62,13 +62,61 @@ function mesureBP(){
   var main_DBP=document.getElementById('dBP').value;
   var displayBP=main_SBP + ' / ' + main_DBP;
 
-  document.getElementById('bPdisplay').innerText = displayBP;
+///////BP display Blink///////
+  var count = 0;
+  var countup = function(){
+    console.log(count++);
+  }
 
+  var timerID= setInterval(function(){
+    //document.getElementById('bPdisplay').innerText = '--- / ---';
+    for (i=1; i<3; i++){
+      setTimeout(function(){
+      document.getElementById('bPdisplay').textContent = '--- / ---';
+      }, 500);
+      setTimeout(function(){
+      document.getElementById('bPdisplay').innerText = '';
+      }, 999);
+      console.log('i is ',i);
+    }
+    countup();
+    if(count > 2){
+      clearInterval(timerID);
+    }
+  }, 1000); //call myFunc() each 0.5sec
+
+  
+
+      setTimeout(function(){
+              document.getElementById('bPdisplay').textContent = ' ';
+
+        document.getElementById('bPdisplay').innerText = main_SBP +' / '+ main_DBP;
+      },4500);
 }//func
 
 
+//clearInterval(timerID);
 
 
+function blinkBP(count){
+    document.getElementById('bPdisplay').innerText = '--- / ---';
+for (i=1; i<3; i++){
+  setTimeout(function(){
+  document.getElementById('bPdisplay').textContent = ' ';
+  }, 500);
+  setTimeout(function(){
+  document.getElementById('bPdisplay').innerText = '--- / ---';
+  }, 999);
+  console.log('i is ',i);
+}
+countup(count);
+}//
+
+function countup(count){
+  count += 1;
+  console.log(count);
+  if (count > 5) clearInterval(timerID); 
+}
 
 </script>
 
@@ -78,7 +126,7 @@ function mesureBP(){
 <!--
 BP elements
   -->
-  <div id='bPdisplay'>-- / --</div>
+  <div id='bPdisplay'>--- / ---</div>
 
   <div id='inputField'>
     <input type="text" id='sBP' value=100>
