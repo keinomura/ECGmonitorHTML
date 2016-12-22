@@ -2,6 +2,8 @@
 <head>
 
 <title>opewindow</title>
+
+
 <script>
 //12/2 1. value change on main window
 //     2. value limit
@@ -53,11 +55,130 @@ function valueLimitation(upperLimit, lowerLimit, aValue){
  return aValue;
 }//func
 
+///////////////////////
+// BP mesure button
+///////////////////////
+
+function mesureBP(){
+  var main_SBP=document.getElementById('sBP').value;
+  var main_DBP=document.getElementById('dBP').value;
+  var displayBP=main_SBP + ' / ' + main_DBP;
+
+///////BP display Blink///////
+  var count = 0;
+  var countup = function(){
+    console.log(count++);
+  }
+
+  var timerID= setInterval(function(){
+    //document.getElementById('bPdisplay').innerText = '--- / ---';
+    for (i=1; i<3; i++){
+      setTimeout(function(){
+      document.getElementById('bPdisplay').textContent = '--- / ---';
+      }, 500);
+      setTimeout(function(){
+      document.getElementById('bPdisplay').innerText = '';
+      }, 999);
+      console.log('i is ',i);
+    }
+    countup();
+    if(count > 2){
+      clearInterval(timerID);
+    }
+  }, 1000); //call myFunc() each 0.5sec
+
+  
+
+      setTimeout(function(){
+              document.getElementById('bPdisplay').textContent = ' ';
+
+        document.getElementById('bPdisplay').innerText = main_SBP +' / '+ main_DBP;
+      },4500);
+}//func
+
+
+
+
+function blinkBP(count){
+    document.getElementById('bPdisplay').innerText = '--- / ---';
+for (i=1; i<3; i++){
+  setTimeout(function(){
+  document.getElementById('bPdisplay').textContent = ' ';
+  }, 500);
+  setTimeout(function(){
+  document.getElementById('bPdisplay').innerText = '--- / ---';
+  }, 999);
+  console.log('i is ',i);
+}
+countup(count);
+}//
+
+function countup(count){
+  count += 1;
+  console.log(count);
+  if (count > 5) clearInterval(timerID); 
+}
+
+///////////////////////
+// HR buttons
+///////////////////////
+
+function hRnumChange(pm) {
+  //get spO2 value of ,main_Window
+  var main_HRnum=document.getElementById('hR');
+  var hRval=main_HRnum.innerText;
+  //sub_window element
+  var sub_HRnum=sub_win.document.getElementById('hR2');
+  //spO2 value is number or not
+  if (!parseInt(hRval)==false){ //number
+    if (pm == '+') {
+      var calcNum = parseInt(hRval) + 1;
+        }else{
+      var calcNum = parseInt(hRval) - 1;
+    }
+    main_HRnum.innerText = valueLimitation(200, 20, calcNum); //volume limitation
+    sub_HRnum.innerText = main_HRnum.innerText;
+  }
+}
+
+function valueLimitation(upperLimit, lowerLimit, aValue){
+ if (aValue >= upperLimit) aValue=upperLimit;
+ if (aValue <= lowerLimit) aValue=lowerLimit;
+ return aValue;
+}//func
+
+
 </script>
+
+
+
+
+
 
 </head>
 
 <body>
+<!--
+BP elements
+  -->
+  <div id='bPdisplay' style="height: 30px;">--- / ---</div>  <!--set static height-->
+
+  <div id='inputField'>
+    <input type="text" id='sBP' value=100>
+    <input type="text" id='dBP' value=60>
+  </div>
+
+  <div class="button">	
+    <input type="button" id="mesureBP" value='mesure' onclick="mesureBP();">
+	</div>
+  
+
+
+
+
+<!--
+SpO2 elements
+  -->
         <div id='spO2'>5</div>
 
         <div class="button">	
@@ -65,6 +186,19 @@ function valueLimitation(upperLimit, lowerLimit, aValue){
 	</div>
                 <div class="button">	
                 <input type="button" id="numDW" value="DW" onclick="numChange('-');">
+	</div>
+
+
+<!--
+HR elements
+  -->
+        <div id='hR'>60</div>
+
+        <div class="HR">	
+                <input type="button" id="hRUP" value="UP" onclick="hRnumChange('+');">
+	</div>
+                <div class="button">	
+                <input type="button" id="hRDW" value="DW" onclick="hRnumChange('-');">
 	</div>
 
         <a href="opeWin.html" onClick="openSubWin()">open child window</a>
