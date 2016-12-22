@@ -2,6 +2,8 @@
 <head>
 
 <title>opewindow</title>
+
+
 <script>
 //12/2 1. value change on main window
 //     2. value limit
@@ -95,7 +97,6 @@ function mesureBP(){
 }//func
 
 
-//clearInterval(timerID);
 
 
 function blinkBP(count){
@@ -118,7 +119,41 @@ function countup(count){
   if (count > 5) clearInterval(timerID); 
 }
 
+///////////////////////
+// HR buttons
+///////////////////////
+
+function hRnumChange(pm) {
+  //get spO2 value of ,main_Window
+  var main_HRnum=document.getElementById('hR');
+  var hRval=main_HRnum.innerText;
+  //sub_window element
+  var sub_HRnum=sub_win.document.getElementById('hR2');
+  //spO2 value is number or not
+  if (!parseInt(hRval)==false){ //number
+    if (pm == '+') {
+      var calcNum = parseInt(hRval) + 1;
+        }else{
+      var calcNum = parseInt(hRval) - 1;
+    }
+    main_HRnum.innerText = valueLimitation(200, 20, calcNum); //volume limitation
+    sub_HRnum.innerText = main_HRnum.innerText;
+  }
+}
+
+function valueLimitation(upperLimit, lowerLimit, aValue){
+ if (aValue >= upperLimit) aValue=upperLimit;
+ if (aValue <= lowerLimit) aValue=lowerLimit;
+ return aValue;
+}//func
+
+
 </script>
+
+
+
+
+
 
 </head>
 
@@ -126,7 +161,7 @@ function countup(count){
 <!--
 BP elements
   -->
-  <div id='bPdisplay'>--- / ---</div>
+  <div id='bPdisplay' style="height: 30px;">--- / ---</div>  <!--set static height-->
 
   <div id='inputField'>
     <input type="text" id='sBP' value=100>
@@ -151,6 +186,19 @@ SpO2 elements
 	</div>
                 <div class="button">	
                 <input type="button" id="numDW" value="DW" onclick="numChange('-');">
+	</div>
+
+
+<!--
+HR elements
+  -->
+        <div id='hR'>60</div>
+
+        <div class="HR">	
+                <input type="button" id="hRUP" value="UP" onclick="hRnumChange('+');">
+	</div>
+                <div class="button">	
+                <input type="button" id="hRDW" value="DW" onclick="hRnumChange('-');">
 	</div>
 
         <a href="opeWin.html" onClick="openSubWin()">open child window</a>
