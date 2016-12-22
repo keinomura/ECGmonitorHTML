@@ -148,6 +148,49 @@ function valueLimitation(upperLimit, lowerLimit, aValue){
 }//func
 
 
+///////////////////////
+// START button
+// 1. start hr sound
+// 2. show BP and HR values
+///////////////////////
+
+//  sound when button
+
+// sound play function
+//var ringfunc;
+
+
+var timeoutid = null; //need to global var to clearTimeout
+function ring(){
+  // change button value
+  var buttonValue = document.getElementById("sButton").value;
+  if (buttonValue == "start"){
+    document.getElementById("sButton").value = "stop";
+  } else {
+    document.getElementById("sButton").value = "start";
+  }
+
+  // clearTimeout
+  clearTimeout(timeoutid);
+
+  //timeout function
+  var ringfunc = function(){
+    console.log("im in!!");
+    document.getElementById("aSound").play()
+    console.log(document.getElementById('hR').innerText);
+    var hRtime = 60000 / (document.getElementById('hR').innerText) * 1;
+    console.log(hRtime);
+    timeoutid = setTimeout(ringfunc, hRtime);
+  }
+  
+  if (buttonValue == "start"){
+    ringfunc(); //run only 'start'
+  }
+}
+
+
+
+
 </script>
 
 
@@ -159,13 +202,23 @@ function valueLimitation(upperLimit, lowerLimit, aValue){
 
 <body>
 <!--
+audio elements
+  -->
+<audio id="aSound" preload='auto'>
+  <source src='70.wav' type='audio/wav'>
+  damedayo
+</audio>
+
+
+<!--
 BP elements
   -->
+
   <div id='bPdisplay' style="height: 30px;">--- / ---</div>  <!--set static height-->
 
   <div id='inputField'>
-    <input type="text" id='sBP' value=100>
-    <input type="text" id='dBP' value=60>
+    <input type="text" id='sBP' value='100'>
+    <input type="text" id='dBP' value='60'>
   </div>
 
   <div class="button">	
@@ -200,6 +253,7 @@ HR elements
                 <div class="button">	
                 <input type="button" id="hRDW" value="DW" onclick="hRnumChange('-');">
 	</div>
+<input id='sButton' type="button" onclick="ring();" value="start">
 
         <a href="opeWin.html" onClick="openSubWin()">open child window</a>
 
