@@ -44,7 +44,7 @@ function numChange(pm) {
         }else{
       var calcNum = parseInt(spO2val) - 1;
     }
-    main_spO2num.innerText = valueLimitation(100, 60, calcNum); //volume limitation
+    main_spO2num.innerText = valueLimitation(100, 70, calcNum); //volume limitation
     sub_spO2num.innerText = main_spO2num.innerText;
   }
 }
@@ -175,11 +175,10 @@ function ring(){
 
   //timeout function
   var ringfunc = function(){
-    console.log("im in!!");
-    document.getElementById("aSound").play()
-    console.log(document.getElementById('hR').innerText);
+    var dinum = document.getElementById('spO2').innerText;
+    console.log(dinum);
+    document.getElementById(dinum).play();
     var hRtime = 60000 / (document.getElementById('hR').innerText) * 1;
-    console.log(hRtime);
     timeoutid = setTimeout(ringfunc, hRtime);
   }
   
@@ -204,10 +203,38 @@ function ring(){
 <!--
 audio elements
   -->
-<audio id="aSound" preload='auto'>
-  <source src='70.wav' type='audio/wav'>
-  damedayo
-</audio>
+<audio id='70' preload='auto'><source src='wav/70.wav' type='audio/wav'></audio>
+<audio id='71' preload='auto'><source src='wav/71.wav' type='audio/wav'></audio>
+<audio id='72' preload='auto'><source src='wav/72.wav' type='audio/wav'></audio>
+<audio id='73' preload='auto'><source src='wav/73.wav' type='audio/wav'></audio>
+<audio id='74' preload='auto'><source src='wav/74.wav' type='audio/wav'></audio>
+<audio id='75' preload='auto'><source src='wav/75.wav' type='audio/wav'></audio>
+<audio id='76' preload='auto'><source src='wav/76.wav' type='audio/wav'></audio>
+<audio id='77' preload='auto'><source src='wav/77.wav' type='audio/wav'></audio>
+<audio id='78' preload='auto'><source src='wav/78.wav' type='audio/wav'></audio>
+<audio id='79' preload='auto'><source src='wav/79.wav' type='audio/wav'></audio>
+<audio id='80' preload='auto'><source src='wav/80.wav' type='audio/wav'></audio>
+<audio id='81' preload='auto'><source src='wav/81.wav' type='audio/wav'></audio>
+<audio id='82' preload='auto'><source src='wav/82.wav' type='audio/wav'></audio>
+<audio id='83' preload='auto'><source src='wav/83.wav' type='audio/wav'></audio>
+<audio id='84' preload='auto'><source src='wav/84.wav' type='audio/wav'></audio>
+<audio id='85' preload='auto'><source src='wav/85.wav' type='audio/wav'></audio>
+<audio id='86' preload='auto'><source src='wav/86.wav' type='audio/wav'></audio>
+<audio id='87' preload='auto'><source src='wav/87.wav' type='audio/wav'></audio>
+<audio id='88' preload='auto'><source src='wav/88.wav' type='audio/wav'></audio>
+<audio id='89' preload='auto'><source src='wav/89.wav' type='audio/wav'></audio>
+<audio id='90' preload='auto'><source src='wav/90.wav' type='audio/wav'></audio>
+<audio id='91' preload='auto'><source src='wav/91.wav' type='audio/wav'></audio>
+<audio id='92' preload='auto'><source src='wav/92.wav' type='audio/wav'></audio>
+<audio id='93' preload='auto'><source src='wav/93.wav' type='audio/wav'></audio>
+<audio id='94' preload='auto'><source src='wav/94.wav' type='audio/wav'></audio>
+<audio id='95' preload='auto'><source src='wav/95.wav' type='audio/wav'></audio>
+<audio id='96' preload='auto'><source src='wav/96.wav' type='audio/wav'></audio>
+<audio id='97' preload='auto'><source src='wav/97.wav' type='audio/wav'></audio>
+<audio id='98' preload='auto'><source src='wav/98.wav' type='audio/wav'></audio>
+<audio id='99' preload='auto'><source src='wav/99.wav' type='audio/wav'></audio>
+<audio id='100' preload='auto'><source src='wav/100.wav' type='audio/wav'></audio>
+
 
 
 <!--
