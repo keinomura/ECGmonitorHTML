@@ -1,0 +1,47 @@
+.smallMonitorVolume:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.smallMonitor{
+  height: 150px;
+  width: 200px;
+  background-color: black;
+  float: left;
+}
+.volumeBar{
+  float: left;
+}
+.smallMonitorValue{
+  margin: 5px;
+  font-size: 30px;
+  text-align: center;
+  height: 40px;
+}
+
+.hRcolor {
+  color: green;
+}
+
+.bPcolor {
+  color: palevioletred;
+}
+
+.sPO2color {
+  color: lightskyblue;
+}
+
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 20px;
+    height: 150px;
+    padding: 20 0 px;
+}
+
+.inputBox {
+  width: 60px;
+  text-align: center;
+}
