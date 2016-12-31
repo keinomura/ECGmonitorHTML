@@ -2,287 +2,65 @@
 <head>
 
 <title>opewindow</title>
-
-
-<script>
-//12/2 1. value change on main window
-//     2. value limit
-
-
-//open subWindow, keep subWindow Element as sub_win
-var sub_win;
-//sub_win = window.open('dispWin.html', 'disp window', 'width=300,height=150,scrollbars=1,resizable=1');
-openSubWin();
-
-//open subWindow with URL link
-function openSubWin(){
-        sub_win = window.open('dispWin.html', 'disp window', 'width=300,height=150,scrollbars=1,resizable=1');
-         return false;
-};
-
-//set initial spO2 value, after HTML loaded
-var iniSpO2=95;
-window.onload = function() {
-        document.getElementById('spO2').innerText = iniSpO2;
-};
-
-
-///////////////////////
-// SpO2 buttons
-///////////////////////
-
-function numChange(pm) {
-  //get spO2 value of ,main_Window
-  var main_spO2num=document.getElementById('spO2');
-  var spO2val=main_spO2num.innerText;
-  //sub_window element
-  var sub_spO2num=sub_win.document.getElementById('spO22');
-  //spO2 value is number or not
-  if (!parseInt(spO2val)==false){ //number
-    if (pm == '+') {
-      var calcNum = parseInt(spO2val) + 1;
-        }else{
-      var calcNum = parseInt(spO2val) - 1;
-    }
-    main_spO2num.innerText = valueLimitation(100, 70, calcNum); //volume limitation
-    sub_spO2num.innerText = main_spO2num.innerText;
-  }
-}
-
-function valueLimitation(upperLimit, lowerLimit, aValue){
- if (aValue >= upperLimit) aValue=upperLimit;
- if (aValue <= lowerLimit) aValue=lowerLimit;
- return aValue;
-}//func
-
-///////////////////////
-// BP mesure button
-///////////////////////
-
-function mesureBP(){
-  var main_SBP=document.getElementById('sBP').value;
-  var main_DBP=document.getElementById('dBP').value;
-  var displayBP=main_SBP + ' / ' + main_DBP;
-
-///////BP display Blink///////
-  var count = 0;
-  var countup = function(){
-    console.log(count++);
-  }
-
-  var timerID= setInterval(function(){
-    //document.getElementById('bPdisplay').innerText = '--- / ---';
-    for (i=1; i<3; i++){
-      setTimeout(function(){
-      document.getElementById('bPdisplay').textContent = '--- / ---';
-      }, 500);
-      setTimeout(function(){
-      document.getElementById('bPdisplay').innerText = '';
-      }, 999);
-      console.log('i is ',i);
-    }
-    countup();
-    if(count > 2){
-      clearInterval(timerID);
-    }
-  }, 1000); //call myFunc() each 0.5sec
-
-  
-
-      setTimeout(function(){
-              document.getElementById('bPdisplay').textContent = ' ';
-
-        document.getElementById('bPdisplay').innerText = main_SBP +' / '+ main_DBP;
-      },4500);
-}//func
-
-
-
-
-function blinkBP(count){
-    document.getElementById('bPdisplay').innerText = '--- / ---';
-for (i=1; i<3; i++){
-  setTimeout(function(){
-  document.getElementById('bPdisplay').textContent = ' ';
-  }, 500);
-  setTimeout(function(){
-  document.getElementById('bPdisplay').innerText = '--- / ---';
-  }, 999);
-  console.log('i is ',i);
-}
-countup(count);
-}//
-
-function countup(count){
-  count += 1;
-  console.log(count);
-  if (count > 5) clearInterval(timerID); 
-}
-
-///////////////////////
-// HR buttons
-///////////////////////
-
-function hRnumChange(pm) {
-  //get spO2 value of ,main_Window
-  var main_HRnum=document.getElementById('hR');
-  var hRval=main_HRnum.innerText;
-  //sub_window element
-  var sub_HRnum=sub_win.document.getElementById('hR2');
-  //spO2 value is number or not
-  if (!parseInt(hRval)==false){ //number
-    if (pm == '+') {
-      var calcNum = parseInt(hRval) + 1;
-        }else{
-      var calcNum = parseInt(hRval) - 1;
-    }
-    main_HRnum.innerText = valueLimitation(200, 20, calcNum); //volume limitation
-    sub_HRnum.innerText = main_HRnum.innerText;
-  }
-}
-
-function valueLimitation(upperLimit, lowerLimit, aValue){
- if (aValue >= upperLimit) aValue=upperLimit;
- if (aValue <= lowerLimit) aValue=lowerLimit;
- return aValue;
-}//func
-
-
-///////////////////////
-// START button
-// 1. start hr sound
-// 2. show BP and HR values
-///////////////////////
-
-//  sound when button
-
-// sound play function
-//var ringfunc;
-
-
-var timeoutid = null; //need to global var to clearTimeout
-function ring(){
-  // change button value
-  var buttonValue = document.getElementById("sButton").value;
-  if (buttonValue == "start"){
-    document.getElementById("sButton").value = "stop";
-  } else {
-    document.getElementById("sButton").value = "start";
-  }
-
-  // clearTimeout
-  clearTimeout(timeoutid);
-
-  //timeout function
-  var ringfunc = function(){
-    var dinum = document.getElementById('spO2').innerText;
-    console.log(dinum);
-    document.getElementById(dinum).play();
-    var hRtime = 60000 / (document.getElementById('hR').innerText) * 1;
-    timeoutid = setTimeout(ringfunc, hRtime);
-  }
-  
-  if (buttonValue == "start"){
-    ringfunc(); //run only 'start'
-  }
-}
-
-
-
-
-</script>
-
-
-
-
-
-
+<script type="text/javascript" src="opeWin.js"></script>
+<link rel="stylesheet" type="text/css" href="opeWin.css">
 </head>
 
 <body>
-<!--
-audio elements
-  -->
-<audio id='70' preload='auto'><source src='wav/70.wav' type='audio/wav'></audio>
-<audio id='71' preload='auto'><source src='wav/71.wav' type='audio/wav'></audio>
-<audio id='72' preload='auto'><source src='wav/72.wav' type='audio/wav'></audio>
-<audio id='73' preload='auto'><source src='wav/73.wav' type='audio/wav'></audio>
-<audio id='74' preload='auto'><source src='wav/74.wav' type='audio/wav'></audio>
-<audio id='75' preload='auto'><source src='wav/75.wav' type='audio/wav'></audio>
-<audio id='76' preload='auto'><source src='wav/76.wav' type='audio/wav'></audio>
-<audio id='77' preload='auto'><source src='wav/77.wav' type='audio/wav'></audio>
-<audio id='78' preload='auto'><source src='wav/78.wav' type='audio/wav'></audio>
-<audio id='79' preload='auto'><source src='wav/79.wav' type='audio/wav'></audio>
-<audio id='80' preload='auto'><source src='wav/80.wav' type='audio/wav'></audio>
-<audio id='81' preload='auto'><source src='wav/81.wav' type='audio/wav'></audio>
-<audio id='82' preload='auto'><source src='wav/82.wav' type='audio/wav'></audio>
-<audio id='83' preload='auto'><source src='wav/83.wav' type='audio/wav'></audio>
-<audio id='84' preload='auto'><source src='wav/84.wav' type='audio/wav'></audio>
-<audio id='85' preload='auto'><source src='wav/85.wav' type='audio/wav'></audio>
-<audio id='86' preload='auto'><source src='wav/86.wav' type='audio/wav'></audio>
-<audio id='87' preload='auto'><source src='wav/87.wav' type='audio/wav'></audio>
-<audio id='88' preload='auto'><source src='wav/88.wav' type='audio/wav'></audio>
-<audio id='89' preload='auto'><source src='wav/89.wav' type='audio/wav'></audio>
-<audio id='90' preload='auto'><source src='wav/90.wav' type='audio/wav'></audio>
-<audio id='91' preload='auto'><source src='wav/91.wav' type='audio/wav'></audio>
-<audio id='92' preload='auto'><source src='wav/92.wav' type='audio/wav'></audio>
-<audio id='93' preload='auto'><source src='wav/93.wav' type='audio/wav'></audio>
-<audio id='94' preload='auto'><source src='wav/94.wav' type='audio/wav'></audio>
-<audio id='95' preload='auto'><source src='wav/95.wav' type='audio/wav'></audio>
-<audio id='96' preload='auto'><source src='wav/96.wav' type='audio/wav'></audio>
-<audio id='97' preload='auto'><source src='wav/97.wav' type='audio/wav'></audio>
-<audio id='98' preload='auto'><source src='wav/98.wav' type='audio/wav'></audio>
-<audio id='99' preload='auto'><source src='wav/99.wav' type='audio/wav'></audio>
-<audio id='100' preload='auto'><source src='wav/100.wav' type='audio/wav'></audio>
-
-
 
 <!--
-BP elements
+Small Monitor elements
   -->
-
-  <div id='bPdisplay' style="height: 30px;">--- / ---</div>  <!--set static height-->
-
-  <div id='inputField'>
-    <input type="text" id='sBP' value='100'>
-    <input type="text" id='dBP' value='60'>
+<div class='smallMonitorVolume'>
+  <div class='smallMonitor' id="smallMonitor">
+    <div id='hRsmall' class='smallMonitorValue hRcolor'>--</div>
+    <div id='bPsmall' class='smallMonitorValue bPcolor'>---/---</div>
+    <div id='spO2small' class='smallMonitorValue sPO2color'>--</div>
   </div>
-
-  <div class="button">	
-    <input type="button" id="mesureBP" value='mesure' onclick="mesureBP();">
-	</div>
-  
-
-
-
-
-<!--
-SpO2 elements
-  -->
-        <div id='spO2'>5</div>
-
-        <div class="button">	
-                <input type="button" id="numUP" value="UP" onclick="numChange('+');">
-	</div>
-                <div class="button">	
-                <input type="button" id="numDW" value="DW" onclick="numChange('-');">
-	</div>
-
-
+  <div class='volumeBar' id='volumeBar'>
+    <input id='volControl' type="range" orient="vertical" min="0" max="1.0" value="1.0" step="0.1"/> 
+  </div>
+</div>
 <!--
 HR elements
   -->
-        <div id='hR'>60</div>
+<div class="controlerPanel">
+  <div class="hRBox">
+    <div id='hR' hidden>95</div>
+    <div class="button">	
+      <input id="hRSlider" type="range" min="30" max="140" value="95" step="1" onchange="changeSliderBox(this);"/>
+      <input type="number" id="hRSliderSide" value="95" min="30" max="140" onchange="changeSliderBox(this);"/>
+    </div>
+  </div>
 
-        <div class="HR">	
-                <input type="button" id="hRUP" value="UP" onclick="hRnumChange('+');">
-	</div>
-                <div class="button">	
-                <input type="button" id="hRDW" value="DW" onclick="hRnumChange('-');">
-	</div>
-<input id='sButton' type="button" onclick="ring();" value="start">
+  <!--
+  BP elements
+    -->
+  <div class="bPbox">
+    <!-- <div id='bPdisplay' style="height: 30px;">--- / ---</div>  <!--set static height-->
+    <div id='inputField'>
+      <input class='inputBox' type="text" id='sBP' value='100'>
+      <input class='inputBox' type="text" id='dBP' value='60'>
+    </div>
+    <div class="button">	
+      <input id="bPSlider" type="range" min="60" max="250" value="95" step="1" onchange="changeSliderBox(this);"/>
+      <input type="button" id="mesureBP" value='mesure' onclick="mesureBP();">
+    </div>
+  </div>
 
-        <a href="opeWin.html" onClick="openSubWin()">open child window</a>
+  <!--
+  SpO2 elements
+    -->
+  <div class="spO2Box">
+    <div id='spO2' hidden>5</div>
+    <div class="button">	
+      <input id="spO2Slider" type="range" min="70" max="100" value="95" step="1" onchange="changeSliderBox(this);"/>
+      <input type="number" id="spO2SliderSide" value="95" min="70" max="100" onchange="changeSliderBox(this);"/>
+    </div>
+
+  <input id='sButton' type="button" onclick="ring();" value="start">
+</div>
+        <a href="opeWin.html" onClick="event.preventDefault();openSubWin(); return false;">open child window</a> <!-- "event.preventDefault()  return false" work not to reload with href-->
 
 </body>
 </html>
