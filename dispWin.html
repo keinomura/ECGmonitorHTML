@@ -2,39 +2,8 @@
 <head>
 
 <title>disp window</title>
-<!--
-<link rel="stylesheet" type="text/css" href="dispWin.css">
--->
-<style type="text/css">
-body {
-    background-color: black;
-}
 
-#hR2 {
-    text-align: center;
-    height:300px;
-    font-size: 150px;
-    color: green;
-}
-
-#sub_BPDisplay{
-        text-align: center;
-
-    height: 300px;
-    font-size: 150px;
-    color: palevioletred;
-
-}
-
-#spO22{
-        text-align: center;
-
-    height: 300px;
-    font-size: 150px;
-    color: deepskyblue;
-    
-}
-</style>
+<link rel="stylesheet" type="text/css" href="opeWin.css">
 
 <script>
 //
@@ -59,9 +28,59 @@ window.onload = function() {
 </head>
 
 <body>
-  <div id='hR2'>--</div>
-  <div id='sub_BPDisplay'>--- / ---</div>
-  <div id='spO22'>--</div>
-    
+
+<div class='Display'>
+  <div class="monitorHeader">ECG monitor for ISLS</div>
+  <div class='yohaku' style="height: 20px"></div>
+
+  <div class="monitorPanel">
+    <div class="waveMonitor">
+      <div class="canvasWrap">
+        <canvas class='canvas' id="hRCanvas2"></canvas>
+      </div>
+      <div class="canvasWrap">
+        <canvas class='canvas' id="spO2Canvas2" ></canvas>
+      </div>
+      <div class="canvasWrap">
+        <canvas class='canvas' id="respCanvas2"></canvas>
+      </div>
+    </div>
+
+
+    <div class="volumePanel">
+      <!--
+      Small Monitor elements
+        -->
+        <div class='eachValueBox'>subvalueTextsubvalueText
+          <div class='yohaku' style="height: 10px"></div>
+          <div id='hR2' class='mainMonitorValue hRcolor'>--</div>
+          <div class='subvalueText hRcolor textValueTitle'>ECG</div>
+          <div class='subvalueText hRcolor subWinsubtextValueTitle'>bpm</div> 
+        </div>
+        <div class='eachValueBox'>
+          <div class='yohaku' style="height: 15px"></div>
+          <div id='sub_BPDisplay' class='mainMonitorValue bPcolor' style="font-size: 8vh;">--- / ---</div>
+          <div class='subvalueText bPcolor textValueTitle'>NIBP</div>
+          <div class='subvalueText bPcolor subWinbuttomsubtextValueTitle'>MANUAL</div> 
+        </div>
+        <div class='eachValueBox'>
+          <div class='yohaku' style="height: 10px"></div>
+          <div id='spO22' class='mainMonitorValue sPO2color'>--</div>
+          <div class='subvalueText sPO2color textValueTitle'>SpO2</div>
+          <div class='subvalueText sPO2color subWinsubtextValueTitle'>%</div> 
+        </div>
+      <div class='eachValueBox'>
+        <div class='yohaku' style="height: 10px"></div>
+        <div id='rR2' class='mainMonitorValue respcolor'>--</div>
+        <div class='subvalueText respcolor textValueTitle'>Resp</div>
+        <div class='subvalueText respcolor subWinsubtextValueTitle'>rpm</div> 
+      </div> 
+
+        </div>
+    </div>
+
+  <div class="monitorFooter"></div>
+</div>
+
 </body>
 </html>
